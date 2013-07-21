@@ -15,21 +15,21 @@ module Kraid::Agent
       module ClassMethods
         # @raise [Kraid::Agent::NotStartedError] if the cache manager has not been started
         #
-        # @return [Kraid::Agent::CacheBuilder]
+        # @return [Kraid::Agent::ChefServ]
         def chef_serv
           app_actor(:chef_serv)
         end
 
         # @raise [Kraid::Agent::NotStartedError] if the cache manager has not been started
         #
-        # @return [Kraid::Agent::CacheManager]
+        # @return [Kraid::Agent::OhaiServ]
         def ohai_serv
           app_actor(:ohai_serv)
         end
 
         # @raise [Kraid::Agent::NotStartedError] if the rest gateway has not been started
         #
-        # @return [Kraid::Agent::RESTGateway]
+        # @return [Kraid::Agent::Router]
         def router
           app_actor(:router)
         end

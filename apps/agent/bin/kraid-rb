@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-$:.push File.expand_path("../../lib", __FILE__)
+$:.push File.expand_path("../../rlib", __FILE__)
 require 'rubygems'
 require 'bundler'
 require 'kraid-agent'

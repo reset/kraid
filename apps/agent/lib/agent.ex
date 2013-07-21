@@ -19,8 +19,8 @@ defmodule Kraid.Agent do
     command(:echo, message)
   end
 
-  def apps_root do
-    Path.join(project_root, "apps")
+  def app_root do
+    Path.join(project_root, "apps/agent")
   end
 
   def project_root do
@@ -45,6 +45,6 @@ defmodule Kraid.Agent do
   end
 
   defp runner_bin do
-    Path.join(apps_root, "ruby_agent/bin/kraid-rb")
+    Path.join(app_root, "bin/kraid-rb")
   end
 end

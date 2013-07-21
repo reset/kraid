@@ -38,7 +38,7 @@ module Kraid::Agent
         Erlectricity::Receiver.new(port, nil, &block).run
       rescue ErlectricityError => ex
         port.send [ :error, ex.inspect ]
-        raise ex
+        raise ErlangPortError, ex
       end
   end
 end

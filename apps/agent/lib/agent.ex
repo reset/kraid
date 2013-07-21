@@ -24,7 +24,7 @@ defmodule Kraid.Agent do
   end
 
   def project_root do
-    Path.expand("../../")
+    Path.expand("../../../", Path.dirname(__FILE__))
   end
 
   def command(method, args // nil) do

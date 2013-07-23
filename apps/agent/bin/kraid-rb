@@ -2,6 +2,7 @@
 $:.push File.expand_path("../../rlib", __FILE__)
 require 'rubygems'
 require 'bundler'
+require 'bundler/setup'
 require 'kraid-agent'
 
 Kraid::Agent.run(ARGV)

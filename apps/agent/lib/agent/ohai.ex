@@ -7,6 +7,7 @@ defmodule Kraid.Agent.Ohai do
   end
 
   def init(attributes) do
+    :timer.send_after(5000, :poll)
     { :ok, attributes }
   end
 
@@ -14,16 +15,27 @@ defmodule Kraid.Agent.Ohai do
     :gen_server.call(:ohai, :attributes)
   end
 
-  def handle_call(:attributes, _from, attributes) do
-    case Kraid.Agent.RubyProc.ohai do
-      { :ok, new_attributes } ->
-        new_state = new_attributes
-        response  = new_attributes
-      { :error, _reason } ->
-        new_state = attributes
-        response  = :error
-    end
+  def attributes(:reload) do
+    :gen_server.call(:ohai, {:attributes, :reload})
+  end
 
-    { :reply, response, new_state }
+  def handle_call(:attributes, _from, attributes) do
+    { :reply, attributes, attributes }
+  end
+
+  def handle_call({:attributes, :reload}, _from, _state) do
+    attributes = load_attributes
+    { :reply, attributes, attributes }
+  end
+
+  def handle_info(:poll, _state) do
+    attributes = load_attributes
+    :timer.send_after(5000, :poll)
+    { :noreply, attributes }
+  end
+
+  defp load_attributes do
+    { :ok, attributes } = Kraid.Agent.RubyProc.ohai
+    attributes
   end
 end

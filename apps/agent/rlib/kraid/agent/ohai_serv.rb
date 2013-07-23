@@ -9,17 +9,11 @@ module Kraid::Agent
     def initialize
       @system = Ohai::System.new
       @system.require_plugin('os')
-      async(:poll)
-    end
-
-    def poll
-      loop do
-        reload
-        sleep 5
-      end
+      @system.require_plugin("#{@system.os}/uptime")
     end
 
     def run(port)
+      reload
       port.send! [ :ok, JSON.generate(attributes) ]
     end
 

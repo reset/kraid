@@ -1,5 +1,6 @@
 require 'celluloid'
 require 'erlectricity'
+require 'json'
 
 module Kraid
   module Agent

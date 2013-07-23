@@ -7,10 +7,14 @@ defmodule Kraid.Agent.Supervisor do
 
   def init([]) do
     children = [
-      worker(Kraid.Agent.Ohai, []),
-      worker(Kraid.Agent.RubyProc, [])
+      worker(Kraid.Agent.RubyProc, []),
+      worker(Kraid.Agent.Ohai, [])
     ]
 
     supervise(children, strategy: :one_for_one)
+  end
+
+  def terminate(_reason, _state) do
+    Kraid.Agent.RubyProc.shutdown
   end
 end

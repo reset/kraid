@@ -8,16 +8,20 @@ module Kraid::Agent
 
     def initialize
       @system = Ohai::System.new
-      @system.require_plugin('os')
+      @system.all_plugins
+      every(30) { reload }
     end
 
     def run(port)
-      port.send! [ :ok, "Running Ohai" ]
+      port.send! [ :ok, JSON.generate(attributes) ]
     end
 
     def attributes
-      system.refresh_plugins
       system.data
+    end
+
+    def reload
+      system.refresh_plugins
     end
   end
 end

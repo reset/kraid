@@ -8,8 +8,15 @@ module Kraid::Agent
 
     def initialize
       @system = Ohai::System.new
-      @system.all_plugins
-      every(30) { reload }
+      @system.require_plugin('os')
+      async(:poll)
+    end
+
+    def poll
+      loop do
+        reload
+        sleep 5
+      end
     end
 
     def run(port)

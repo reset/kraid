@@ -1,7 +1,9 @@
 defmodule Kraid.Agent.RubyProc do
+  @name :ruby_proc
+
   def start_link do
     pid  = spawn(__MODULE__, :init, [])
-    Process.register(pid, :ruby_proc)
+    Process.register(pid, @name)
     { :ok, pid }
   end
 
@@ -22,7 +24,7 @@ defmodule Kraid.Agent.RubyProc do
   end
 
   def ohai do
-    :ruby_proc <- { self, :ohai }
+    @name <- { self, :ohai }
     receive do
       { :ok, data } -> { :ok, Jsonex.decode(data) }
       { :error, reason } -> { :error, reason }
@@ -30,7 +32,7 @@ defmodule Kraid.Agent.RubyProc do
   end
 
   def shutdown do
-    :ruby_proc <- :shutdown
+    @name <- :shutdown
   end
 
   def shutdown(port) do

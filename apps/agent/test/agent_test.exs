@@ -8,6 +8,6 @@ defmodule Kraid.AgentTest do
   end
 
   test "ohai" do
-    assert Kraid.Agent.ohai == { :ok, "Running Ohai" }
+    assert Kraid.Agent.Ohai.attributes == { :ok, "Running Ohai" }
   end
 end

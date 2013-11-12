@@ -3,3 +3,5 @@ source 'https://rubygems.org'
 gem 'celluloid', github: "celluloid/celluloid"
 gem 'erlectricity'
 gem 'chef'
+# gem 'chef', path: '~/code/chef'
+# gem 'ohai', path: '~/code/ohai'

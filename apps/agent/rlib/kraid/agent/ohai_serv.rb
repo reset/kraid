@@ -9,6 +9,7 @@ module Kraid::Agent
     def initialize
       @system = Ohai::System.new
       @system.require_plugin('os')
+      @system.require_plugin('network')
       @system.require_plugin("#{@system.os}/uptime")
     end
 

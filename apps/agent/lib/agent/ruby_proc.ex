@@ -3,21 +3,21 @@ defmodule Kraid.Agent.RubyProc do
 
   def start_link do
     pid  = spawn(__MODULE__, :init, [])
-    Process.register(pid, @name)
     { :ok, pid }
   end
 
   def init do
+    Process.register(self, @name)
     port = Port.open({:spawn_executable, runner_bin}, [ { :packet, 4 }, :exit_status, :binary ])
-    run(port)
+    loop(port)
   end
 
-  def run(port) do
+  def loop(port) do
     receive do
       { sender, :ohai } ->
         response = command(port, :ohai)
         sender <- response
-        run(port)
+        loop(port)
       :shutdown ->
         shutdown(port)
     end

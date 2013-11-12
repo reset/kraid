@@ -8,12 +8,9 @@ defmodule ApplicationRouter do
     conn.fetch([:cookies, :params])
   end
 
-  # It is common to break your Dynamo in many
-  # routers forwarding the requests between them
-  # forward "/posts", to: PostsRouter
+  forward "/nodes", to: NodesRouter
 
   get "/" do
-    attributes = Kraid.Agent.Ohai.attributes |> Jsonex.encode
-    conn.resp(200, attributes)
+    redirect conn, to: "/nodes"
   end
 end

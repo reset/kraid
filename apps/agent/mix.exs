@@ -4,7 +4,9 @@ defmodule Kraid.Agent.Mixfile do
   def project do
     [ app: :agent,
       version: "0.0.1",
-      elixir: "~> 0.10.0",
+      elixir: "~> 0.11.0",
+      deps_path: "../../deps",
+      lockfile: "../../mix.lock",
       deps: deps ]
   end
 

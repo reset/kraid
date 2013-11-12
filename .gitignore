@@ -1,0 +1,6 @@
+/log
+/deps
+/ebin
+Gemfile.lock
+.DS_Store
+mix.lock

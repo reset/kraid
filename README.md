@@ -1,3 +1,3 @@
 # Kraid
 
-** TODO: Add description **
+THIS PROJECT IS AN EXPERIMENT

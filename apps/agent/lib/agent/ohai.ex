@@ -1,9 +1,10 @@
 defmodule Kraid.Agent.Ohai do
   use GenServer.Behaviour
+  @name :ohai
 
   def start_link do
     attributes = HashDict.new
-    :gen_server.start_link({:local, :ohai}, __MODULE__, attributes, [])
+    :gen_server.start_link({:local, @name}, __MODULE__, attributes, [])
   end
 
   def init(attributes) do
@@ -12,11 +13,11 @@ defmodule Kraid.Agent.Ohai do
   end
 
   def attributes do
-    :gen_server.call(:ohai, :attributes)
+    :gen_server.call(@name, :attributes)
   end
 
   def attributes(:reload) do
-    :gen_server.call(:ohai, {:attributes, :reload})
+    :gen_server.call(@name, {:attributes, :reload})
   end
 
   def handle_call(:attributes, _from, attributes) do
